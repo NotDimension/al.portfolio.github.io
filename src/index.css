@@ -207,6 +207,12 @@
   will-change: transform;
 }
 
+/* Subtle blur on the starfield so the background feels softer */
+.starfield-blur {
+  filter: blur(1.2px);
+  opacity: 0.9;
+}
+
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .cursor-glow { display: none; }
   .tilt-card { transition: none; }
