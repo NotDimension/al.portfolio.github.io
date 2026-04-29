@@ -1,5 +1,6 @@
 import { ArrowUpRight, Users } from "lucide-react";
 import { DiscordServer, serverIcon } from "@/data/servers";
+import { TiltCard } from "./TiltCard";
 
 const roleStyle = (role: string) => {
   if (role.toLowerCase().includes("owner")) return "bg-primary text-primary-foreground";
@@ -7,19 +8,18 @@ const roleStyle = (role: string) => {
   return "bg-accent/15 text-accent";
 };
 
-export const ServerCard = ({ server, index }: { server: DiscordServer; index: number }) => {
+export const ServerCard = ({ server }: { server: DiscordServer }) => {
   const icon = serverIcon(server);
   return (
-    <a
+    <TiltCard
       href={server.invite}
       target="_blank"
       rel="noreferrer noopener"
-      className="group relative flex items-center gap-4 rounded-2xl border border-border/70 bg-card/70 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-card animate-fade-up"
-      style={{ animationDelay: `${index * 50}ms` }}
+      className="group flex h-full items-center gap-4 rounded-2xl border border-border/70 bg-card/70 p-4 backdrop-blur-sm hover:border-primary/50"
     >
       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary">
         {icon ? (
-          <img src={icon} alt={server.name} className="h-full w-full object-cover" loading="lazy" />
+          <img src={icon} alt={server.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/30 to-accent/20 text-lg font-semibold text-foreground">
             {server.name.charAt(0)}
@@ -40,6 +40,6 @@ export const ServerCard = ({ server, index }: { server: DiscordServer; index: nu
       </div>
 
       <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
-    </a>
+    </TiltCard>
   );
 };
