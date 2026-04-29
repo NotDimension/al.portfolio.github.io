@@ -1,28 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const CursorGlow = () => {
-  const [pos, setPos] = useState({ x: -1000, y: -1000 });
-  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const move = (e: MouseEvent) => {
-      setPos({ x: e.clientX, y: e.clientY });
-      setVisible(true);
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+
+    let x = 0;
+    let y = 0;
+    let frame: number | null = null;
+
+    const apply = () => {
+      frame = null;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
     };
-    const leave = () => setVisible(false);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseleave", leave);
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (frame === null) frame = requestAnimationFrame(apply);
+    };
+    el.style.opacity = "1";
+    window.addEventListener("mousemove", onMove, { passive: true });
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseleave", leave);
+      window.removeEventListener("mousemove", onMove);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, []);
 
-  return (
-    <div
-      className="cursor-glow"
-      style={{ left: pos.x, top: pos.y, opacity: visible ? 1 : 0 }}
-    />
-  );
+  return <div ref={ref} className="cursor-glow" aria-hidden />;
 };

@@ -74,10 +74,8 @@ export const Portfolio = () => {
     <div className="relative min-h-screen overflow-x-hidden">
       <CursorGlow />
       {/* ambient bg */}
-      <div className="pointer-events-none fixed -top-40 left-1/2 h-[700px] w-[900px] -translate-x-1/2 rounded-full bg-primary/25 blur-[160px]" />
-      <div className="pointer-events-none fixed top-[40%] -left-40 h-[400px] w-[400px] rounded-full bg-accent/15 blur-[140px]" />
-      <div className="pointer-events-none fixed bottom-0 right-0 h-[400px] w-[500px] rounded-full bg-primary/10 blur-[120px]" />
-
+      <div className="pointer-events-none fixed -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" />
+      <div className="pointer-events-none fixed bottom-0 right-0 h-[300px] w-[400px] rounded-full bg-primary/15 blur-3xl" />
       <main className="relative z-10 mx-auto max-w-5xl px-6">
         {/* HERO — fills the viewport */}
         <section className="relative flex min-h-screen flex-col items-center justify-center text-center">

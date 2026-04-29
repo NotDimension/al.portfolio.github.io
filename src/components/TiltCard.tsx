@@ -1,4 +1,4 @@
-import { useRef, MouseEvent, ReactNode } from "react";
+import { useEffect, useRef, MouseEvent, ReactNode } from "react";
 
 interface TiltCardProps {
   children: ReactNode;
@@ -9,35 +9,53 @@ interface TiltCardProps {
   intensity?: number;
 }
 
+const isCoarse = () =>
+  typeof window !== "undefined" &&
+  (window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
 export const TiltCard = ({
   children,
   className = "",
   href,
   target,
   rel,
-  intensity = 8,
+  intensity = 6,
 }: TiltCardProps) => {
   const ref = useRef<HTMLElement | null>(null);
+  const frame = useRef<number | null>(null);
+  const enabled = useRef(true);
+
+  useEffect(() => {
+    enabled.current = !isCoarse();
+  }, []);
 
   const handleMove = (e: MouseEvent) => {
+    if (!enabled.current) return;
     const el = ref.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const px = x / rect.width;
-    const py = y / rect.height;
-    const rx = (py - 0.5) * -intensity * 2;
-    const ry = (px - 0.5) * intensity * 2;
-    el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
-    el.style.setProperty("--mx", `${x}px`);
-    el.style.setProperty("--my", `${y}px`);
+    const x = e.clientX;
+    const y = e.clientY;
+    if (frame.current) return;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = null;
+      const rect = el.getBoundingClientRect();
+      const px = (x - rect.left) / rect.width;
+      const py = (y - rect.top) / rect.height;
+      const rx = (py - 0.5) * -intensity * 2;
+      const ry = (px - 0.5) * intensity * 2;
+      el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
   };
 
   const handleLeave = () => {
     const el = ref.current;
     if (!el) return;
-    el.style.transform = "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+    if (frame.current) {
+      cancelAnimationFrame(frame.current);
+      frame.current = null;
+    }
+    el.style.transform = "";
   };
 
   const sharedProps = {
@@ -50,16 +68,10 @@ export const TiltCard = ({
   if (href) {
     return (
       <a href={href} target={target} rel={rel} {...sharedProps}>
-        <span className="tilt-shine" />
-        <span className="tilt-card-inner block">{children}</span>
+        {children}
       </a>
     );
   }
 
-  return (
-    <div {...sharedProps}>
-      <span className="tilt-shine" />
-      <span className="tilt-card-inner block">{children}</span>
-    </div>
-  );
+  return <div {...sharedProps}>{children}</div>;
 };
