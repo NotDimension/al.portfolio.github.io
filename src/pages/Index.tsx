@@ -1,15 +1,5 @@
-import { useState } from "react";
-import { BootSequence } from "@/components/BootSequence";
 import { Portfolio } from "@/components/Portfolio";
 
-const Index = () => {
-  const [booted, setBooted] = useState(false);
-  return (
-    <>
-      {!booted && <BootSequence onDone={() => setBooted(true)} />}
-      <Portfolio />
-    </>
-  );
-};
+const Index = () => <Portfolio />;
 
 export default Index;
