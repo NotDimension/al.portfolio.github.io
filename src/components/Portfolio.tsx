@@ -12,6 +12,8 @@ import {
 import { SERVERS } from "@/data/servers";
 import { ServerCard } from "./ServerCard";
 import { useReveal } from "@/hooks/useReveal";
+import { TiltCard } from "./TiltCard";
+import { CursorGlow } from "./CursorGlow";
 
 const AVATAR =
   "https://cdn.discordapp.com/avatars/1223739092366524497/8efc6448a30283164d8725b0bbe2c817.png?size=512";
@@ -70,6 +72,7 @@ export const Portfolio = () => {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <CursorGlow />
       {/* ambient bg */}
       <div className="pointer-events-none fixed -top-40 left-1/2 h-[700px] w-[900px] -translate-x-1/2 rounded-full bg-primary/25 blur-[160px]" />
       <div className="pointer-events-none fixed top-[40%] -left-40 h-[400px] w-[400px] rounded-full bg-accent/15 blur-[140px]" />
@@ -77,7 +80,7 @@ export const Portfolio = () => {
 
       <main className="relative z-10 mx-auto max-w-5xl px-6">
         {/* HERO — fills the viewport */}
-        <section className="flex min-h-screen flex-col items-center justify-center text-center">
+        <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
           <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
             <a
               href="https://solo.to/al_plays16"
@@ -152,7 +155,7 @@ export const Portfolio = () => {
           <div className="grid gap-3 sm:grid-cols-2">
             {currentServers.map((s, i) => (
               <Reveal key={s.invite} delay={i * 80}>
-                <ServerCard server={s} index={0} />
+                <ServerCard server={s} />
               </Reveal>
             ))}
           </div>
@@ -170,7 +173,7 @@ export const Portfolio = () => {
           <div className="grid gap-3 sm:grid-cols-2">
             {pastServers.map((s, i) => (
               <Reveal key={s.invite} delay={i * 80}>
-                <ServerCard server={s} index={0} />
+                <ServerCard server={s} />
               </Reveal>
             ))}
           </div>
@@ -185,11 +188,11 @@ export const Portfolio = () => {
               { v: "3+", l: "Years staffing", icon: Sparkles },
             ].map((s, i) => (
               <Reveal key={s.l} delay={i * 100}>
-                <div className="rounded-2xl border border-border/70 bg-card/60 p-5 text-center backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50 md:p-7">
+                <TiltCard className="rounded-2xl border border-border/70 bg-card/60 p-5 text-center backdrop-blur-sm hover:border-primary/50 md:p-7">
                   <s.icon className="mx-auto mb-2 h-5 w-5 text-primary" />
                   <div className="text-3xl font-bold text-foreground md:text-4xl">{s.v}</div>
                   <div className="mt-1 text-xs text-muted-foreground md:text-sm">{s.l}</div>
-                </div>
+                </TiltCard>
               </Reveal>
             ))}
           </div>
@@ -225,13 +228,13 @@ export const Portfolio = () => {
           <div className="grid gap-4 sm:grid-cols-2">
             {SKILLS.map((s, i) => (
               <Reveal key={s.title} delay={i * 80}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50">
+                <TiltCard className="group h-full rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur-sm hover:border-primary/50">
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
                     <s.icon className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">{s.title}</h3>
                   <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
-                </div>
+                </TiltCard>
               </Reveal>
             ))}
           </div>
