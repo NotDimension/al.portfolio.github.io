@@ -12,6 +12,8 @@ import {
 import { SERVERS } from "@/data/servers";
 import { ServerCard } from "./ServerCard";
 import { useReveal } from "@/hooks/useReveal";
+import { TiltCard } from "./TiltCard";
+import { CursorGlow } from "./CursorGlow";
 
 const AVATAR =
   "https://cdn.discordapp.com/avatars/1223739092366524497/8efc6448a30283164d8725b0bbe2c817.png?size=512";
@@ -70,6 +72,7 @@ export const Portfolio = () => {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <CursorGlow />
       {/* ambient bg */}
       <div className="pointer-events-none fixed -top-40 left-1/2 h-[700px] w-[900px] -translate-x-1/2 rounded-full bg-primary/25 blur-[160px]" />
       <div className="pointer-events-none fixed top-[40%] -left-40 h-[400px] w-[400px] rounded-full bg-accent/15 blur-[140px]" />
@@ -77,7 +80,7 @@ export const Portfolio = () => {
 
       <main className="relative z-10 mx-auto max-w-5xl px-6">
         {/* HERO — fills the viewport */}
-        <section className="flex min-h-screen flex-col items-center justify-center text-center">
+        <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
           <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
             <a
               href="https://solo.to/al_plays16"
@@ -152,7 +155,7 @@ export const Portfolio = () => {
           <div className="grid gap-3 sm:grid-cols-2">
             {currentServers.map((s, i) => (
               <Reveal key={s.invite} delay={i * 80}>
-                <ServerCard server={s} index={0} />
+                <ServerCard server={s} />
               </Reveal>
             ))}
           </div>
@@ -170,7 +173,7 @@ export const Portfolio = () => {
           <div className="grid gap-3 sm:grid-cols-2">
             {pastServers.map((s, i) => (
               <Reveal key={s.invite} delay={i * 80}>
-                <ServerCard server={s} index={0} />
+                <ServerCard server={s} />
               </Reveal>
             ))}
           </div>
