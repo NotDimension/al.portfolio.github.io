@@ -15,7 +15,7 @@ export const ServerCard = ({ server }: { server: DiscordServer }) => {
       href={server.invite}
       target="_blank"
       rel="noreferrer noopener"
-      className="group flex h-full items-center gap-4 rounded-2xl border border-border/70 bg-card/70 p-4 backdrop-blur-sm hover:border-primary/50"
+      className="group flex h-full items-center gap-4 rounded-2xl border border-border/70 bg-card/70 p-4  hover:border-primary/50"
     >
       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary">
         {icon ? (
