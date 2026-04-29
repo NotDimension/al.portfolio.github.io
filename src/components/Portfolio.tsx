@@ -13,7 +13,9 @@ import { SERVERS } from "@/data/servers";
 import { ServerCard } from "./ServerCard";
 import { useReveal } from "@/hooks/useReveal";
 import { TiltCard } from "./TiltCard";
-import { CursorGlow } from "./CursorGlow";
+import { StarField } from "./StarField";
+import { ContactCard } from "./ContactCard";
+import { ScrollProgress } from "./ScrollProgress";
 
 const AVATAR =
   "https://cdn.discordapp.com/avatars/1223739092366524497/8efc6448a30283164d8725b0bbe2c817.png?size=512";
@@ -71,13 +73,11 @@ export const Portfolio = () => {
   const name = "AL";
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      <CursorGlow />
-      {/* ambient bg */}
-      <div className="pointer-events-none fixed -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" />
-      <div className="pointer-events-none fixed bottom-0 right-0 h-[300px] w-[400px] rounded-full bg-primary/15 blur-3xl" />
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
+      <ScrollProgress />
+      <StarField />
       <main className="relative z-10 mx-auto max-w-5xl px-6">
-        {/* HERO — fills the viewport */}
+        {/* HERO */}
         <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
           <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
             <a
@@ -141,7 +141,7 @@ export const Portfolio = () => {
           </div>
         </section>
 
-        {/* EXPERIENCE — current */}
+        {/* CURRENT */}
         <section id="about" className="py-24">
           <Reveal>
             <SectionHeader
@@ -159,7 +159,7 @@ export const Portfolio = () => {
           </div>
         </section>
 
-        {/* EXPERIENCE — past */}
+        {/* PAST */}
         <section className="py-12">
           <Reveal>
             <SectionHeader
@@ -204,7 +204,7 @@ export const Portfolio = () => {
           <Reveal delay={100}>
             <div className="rounded-3xl border border-border/70 bg-card/50 p-6 backdrop-blur-sm md:p-10">
               <p className="text-base leading-relaxed text-foreground/85 md:text-lg">
-                I've been working in Discord communities for years — moderating,
+                I've been working in Discord communities for years, moderating,
                 helping members, setting up bots, and now owning my own server.
                 I take my staff work seriously because the people in these
                 communities deserve a space that's safe, organized and actually
@@ -236,6 +236,16 @@ export const Portfolio = () => {
               </Reveal>
             ))}
           </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="py-20">
+          <Reveal>
+            <SectionHeader eyebrow="Contact" title="Let's connect" />
+          </Reveal>
+          <Reveal delay={100}>
+            <ContactCard />
+          </Reveal>
         </section>
 
         <div className="h-20" />
