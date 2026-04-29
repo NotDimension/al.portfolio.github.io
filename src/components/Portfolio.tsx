@@ -77,7 +77,7 @@ export const Portfolio = () => {
       <div className="pointer-events-none fixed -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" />
       <div className="pointer-events-none fixed bottom-0 right-0 h-[300px] w-[400px] rounded-full bg-primary/15 blur-3xl" />
       <main className="relative z-10 mx-auto max-w-5xl px-6">
-        {/* HERO — fills the viewport */}
+        {/* HERO the viewport */}
         <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
           <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
             <a
@@ -141,7 +141,7 @@ export const Portfolio = () => {
           </div>
         </section>
 
-        {/* EXPERIENCE — current */}
+        {/* CURRENT */}
         <section id="about" className="py-24">
           <Reveal>
             <SectionHeader
@@ -159,7 +159,7 @@ export const Portfolio = () => {
           </div>
         </section>
 
-        {/* EXPERIENCE — past */}
+        {/* PAST */}
         <section className="py-12">
           <Reveal>
             <SectionHeader
@@ -204,7 +204,7 @@ export const Portfolio = () => {
           <Reveal delay={100}>
             <div className="rounded-3xl border border-border/70 bg-card/50 p-6 backdrop-blur-sm md:p-10">
               <p className="text-base leading-relaxed text-foreground/85 md:text-lg">
-                I've been working in Discord communities for years — moderating,
+                I've been working in Discord communities for years, moderating,
                 helping members, setting up bots, and now owning my own server.
                 I take my staff work seriously because the people in these
                 communities deserve a space that's safe, organized and actually
