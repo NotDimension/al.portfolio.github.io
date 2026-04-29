@@ -238,6 +238,16 @@ export const Portfolio = () => {
           </div>
         </section>
 
+        {/* CONTACT */}
+        <section id="contact" className="py-20">
+          <Reveal>
+            <SectionHeader eyebrow="Contact" title="Let's connect" />
+          </Reveal>
+          <Reveal delay={100}>
+            <ContactCard />
+          </Reveal>
+        </section>
+
         <div className="h-20" />
       </main>
     </div>
