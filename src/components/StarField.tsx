@@ -22,9 +22,9 @@ export const StarField = () => {
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    let dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     let stars: Star[] = [];
-    const mouse = { x: -9999, y: -9999, active: false };
+    const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false };
 
     const resize = () => {
       width = canvas.clientWidth;
@@ -34,8 +34,8 @@ export const StarField = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       // Density tuned for perf; cap on small/low devices
-      const density = isCoarse ? 14000 : 9000;
-      const target = Math.min(110, Math.floor((width * height) / density));
+      const density = isCoarse ? 22000 : 16000;
+      const target = Math.min(75, Math.floor((width * height) / density));
       stars = Array.from({ length: target }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -46,22 +46,39 @@ export const StarField = () => {
     };
 
     const onMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      mouse.tx = e.clientX;
+      mouse.ty = e.clientY;
       mouse.active = true;
     };
     const onLeave = () => {
       mouse.active = false;
-      mouse.x = -9999;
-      mouse.y = -9999;
+      mouse.tx = -9999;
+      mouse.ty = -9999;
     };
 
     let raf = 0;
-    const linkDist = 130;
-    const mouseDist = 170;
+    let lastT = 0;
+    const linkDist = 120;
+    const mouseDist = 180;
+    const frameInterval = 1000 / 40; // ~40fps cap
 
-    const draw = () => {
+    const draw = (t: number) => {
+      raf = requestAnimationFrame(draw);
+      if (t - lastT < frameInterval) return;
+      lastT = t;
+
       ctx.clearRect(0, 0, width, height);
+
+      // ease mouse position so lines crawl toward cursor
+      if (mouse.active) {
+        if (mouse.x < -1000) { mouse.x = mouse.tx; mouse.y = mouse.ty; }
+        else {
+          mouse.x += (mouse.tx - mouse.x) * 0.06;
+          mouse.y += (mouse.ty - mouse.y) * 0.06;
+        }
+      } else {
+        mouse.x = -9999; mouse.y = -9999;
+      }
 
       for (const s of stars) {
         s.x += s.vx;
@@ -71,6 +88,8 @@ export const StarField = () => {
       }
 
       // star-to-star links
+      ctx.lineWidth = 0.6;
+      const linkDist2 = linkDist * linkDist;
       for (let i = 0; i < stars.length; i++) {
         const a = stars[i];
         for (let j = i + 1; j < stars.length; j++) {
@@ -78,10 +97,9 @@ export const StarField = () => {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const d2 = dx * dx + dy * dy;
-          if (d2 < linkDist * linkDist) {
-            const alpha = (1 - Math.sqrt(d2) / linkDist) * 0.18;
+          if (d2 < linkDist2) {
+            const alpha = (1 - Math.sqrt(d2) / linkDist) * 0.16;
             ctx.strokeStyle = `hsla(270, 90%, 70%, ${alpha})`;
-            ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -90,32 +108,33 @@ export const StarField = () => {
         }
       }
 
-      // mouse-to-star links
+      // mouse-to-star links (eased)
       if (mouse.active) {
+        ctx.lineWidth = 0.9;
+        const md2 = mouseDist * mouseDist;
         for (const s of stars) {
           const dx = s.x - mouse.x;
           const dy = s.y - mouse.y;
           const d2 = dx * dx + dy * dy;
-          if (d2 < mouseDist * mouseDist) {
+          if (d2 < md2) {
             const dist = Math.sqrt(d2);
-            const alpha = (1 - dist / mouseDist) * 0.55;
+            const alpha = (1 - dist / mouseDist) * 0.5;
             ctx.strokeStyle = `hsla(280, 100%, 75%, ${alpha})`;
-            ctx.lineWidth = 0.9;
             ctx.beginPath();
             ctx.moveTo(s.x, s.y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
 
-            // gentle attraction
-            s.vx += (mouse.x - s.x) * 0.00004;
-            s.vy += (mouse.y - s.y) * 0.00004;
+            // very gentle attraction
+            s.vx += (mouse.x - s.x) * 0.00002;
+            s.vy += (mouse.y - s.y) * 0.00002;
           }
         }
       }
 
       // stars
+      ctx.fillStyle = "hsla(280, 100%, 80%, 0.85)";
       for (const s of stars) {
-        ctx.fillStyle = "hsla(280, 100%, 80%, 0.85)";
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
@@ -125,12 +144,9 @@ export const StarField = () => {
       for (const s of stars) {
         s.vx *= 0.995;
         s.vy *= 0.995;
-        // keep a minimum drift
         if (Math.abs(s.vx) < 0.04) s.vx += (Math.random() - 0.5) * 0.02;
         if (Math.abs(s.vy) < 0.04) s.vy += (Math.random() - 0.5) * 0.02;
       }
-
-      raf = requestAnimationFrame(draw);
     };
 
     resize();
@@ -138,7 +154,7 @@ export const StarField = () => {
     if (!isCoarse) window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseleave", onLeave);
 
-    if (!reduced) draw();
+    if (!reduced) raf = requestAnimationFrame(draw);
     else {
       // single static frame for reduced motion
       ctx.clearRect(0, 0, width, height);
@@ -162,7 +178,7 @@ export const StarField = () => {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 h-screen w-screen"
+      className="pointer-events-none fixed inset-0 z-0 h-screen w-screen starfield-blur"
     />
   );
 };
