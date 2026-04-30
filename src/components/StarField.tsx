@@ -22,7 +22,7 @@ export const StarField = () => {
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+    let dpr = Math.min(window.devicePixelRatio || 1, isCoarse ? 1 : 1.25);
     let stars: Star[] = [];
     const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false };
 
@@ -33,9 +33,10 @@ export const StarField = () => {
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Density tuned for perf; cap on small/low devices
-      const density = isCoarse ? 22000 : 16000;
-      const target = Math.min(75, Math.floor((width * height) / density));
+      // Density tuned for perf; cap aggressively on mobile/low-end
+      const density = isCoarse ? 38000 : 16000;
+      const maxStars = isCoarse ? 35 : 75;
+      const target = Math.min(maxStars, Math.floor((width * height) / density));
       stars = Array.from({ length: target }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -60,7 +61,7 @@ export const StarField = () => {
     let lastT = 0;
     const linkDist = 120;
     const mouseDist = 180;
-    const frameInterval = 1000 / 40; // ~40fps cap
+    const frameInterval = 1000 / (isCoarse ? 30 : 40);
 
     const draw = (t: number) => {
       raf = requestAnimationFrame(draw);
