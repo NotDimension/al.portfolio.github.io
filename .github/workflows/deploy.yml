@@ -1,48 +1,19 @@
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+name: Fix Lockfile
+on: workflow_dispatch # This lets you run it manually
 
 jobs:
-  build:
+  fix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install --frozen-lockfile
-      # For project sites (https://USERNAME.github.io/REPO/) set base to "/REPO/".
-      # For user/org sites (https://USERNAME.github.io/) leave VITE_BASE_PATH as "/".
-      - name: Build
-        env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
-        run: bun run build
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+          node-version: 22
+      - name: Regenerate Lockfile
+        run: |
+          rm -f package-lock.json
+          npm install
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          commit_message: "chore: update package-lock.json"
