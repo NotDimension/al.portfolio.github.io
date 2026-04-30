@@ -61,7 +61,7 @@ export const StarField = () => {
     let lastT = 0;
     const linkDist = 120;
     const mouseDist = 180;
-    const frameInterval = 1000 / 40; // ~40fps cap
+    const frameInterval = 1000 / (isCoarse ? 30 : 40);
 
     const draw = (t: number) => {
       raf = requestAnimationFrame(draw);
