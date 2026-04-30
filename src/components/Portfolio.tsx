@@ -76,7 +76,7 @@ export const Portfolio = () => {
     <div className="relative min-h-screen overflow-x-hidden bg-background">
       <ScrollProgress />
       <StarField />
-      <main className="relative z-10 mx-auto max-w-5xl px-6">
+      <main className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         {/* HERO */}
         <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
           <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
