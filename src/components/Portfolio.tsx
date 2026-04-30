@@ -21,10 +21,10 @@ const AVATAR =
   "https://cdn.discordapp.com/avatars/1223739092366524497/8efc6448a30283164d8725b0bbe2c817.png?size=512";
 
 const SKILLS = [
-  { icon: Shield, title: "Moderation", desc: "Keeping communities safe, organized, and welcoming." },
-  { icon: Bot, title: "Bot Setup", desc: "Configuring MEE6, Carl-bot, Dyno and custom workflows." },
-  { icon: Server, title: "Server Building", desc: "Channels, roles, permissions and structure done right." },
-  { icon: Code2, title: "Scripting", desc: "Currently learning to build my own tools and automations." },
+  { icon: Shield, title: "Moderation", desc: "Keeping communities clean, safe and welcoming. Overseeing members and handling staff applications." },
+  { icon: Bot, title: "Bot & Plugin Setup", desc: "Plugin installation & configuration, MEE6, Carl-bot, Dyno and custom workflows." },
+  { icon: Server, title: "Server Building", desc: "Channels, roles, permissions and structure done right, from small SMPs to 250+ player communities." },
+  { icon: Code2, title: "Admin & Maintenance", desc: "Debugging, monitoring and logs management. Currently learning to script my own tools." },
 ];
 
 const currentServers = SERVERS.filter((s) => !s.role.toLowerCase().includes("retired"));
