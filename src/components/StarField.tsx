@@ -22,7 +22,7 @@ export const StarField = () => {
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, isCoarseInit() ? 1 : 1.25);
+    let dpr = Math.min(window.devicePixelRatio || 1, isCoarse ? 1 : 1.25);
     let stars: Star[] = [];
     const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false };
 
