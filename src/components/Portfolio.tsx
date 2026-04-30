@@ -94,7 +94,7 @@ export const Portfolio = () => {
             </a>
           </div>
 
-          <h1 className="text-7xl font-bold tracking-tight md:text-9xl">
+          <h1 className="text-6xl font-bold tracking-tight sm:text-8xl md:text-9xl">
             <a
               href="#about"
               className="text-shimmer cursor-pointer"
