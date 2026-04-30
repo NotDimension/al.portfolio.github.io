@@ -18,7 +18,7 @@ export const SERVERS: DiscordServer[] = [
   { name: "StaticPVP", role: "Retired Mod", members: "6.2K+", invite: "https://discord.gg/bg9X2jQgKy", guildId: "1396136303615283250", iconHash: "e425cfe820415bdafc6dea521ace453c" },
   { name: "Cavern", role: "Retired Jr. Mod", members: "5.9K+", invite: "https://discord.gg/hXwgFMFh7B", guildId: "1042576517470900265", iconHash: "a83e6346ab5919269a4e579691835216" },
   { name: "Echo Network", role: "Helper", members: "3K+", invite: "https://discord.gg/TGQ4azvzHp", guildId: "1332821874014425212", iconHash: "3df298fc3150a33a9ed83c672308fbc9" },
-  { name: "KyroMC", role: "Retired Admin + CMA", members: "2.8K+", invite: "https://discord.gg/6KXQ9stBEU", guildId: "", iconHash: null },
+  { name: "KyroMC", role: "Retired Admin + CMA", members: "3.5K+", invite: "https://discord.gg/dMjq9NJCYT", guildId: "", iconHash: null },
   { name: "ClassicMC", role: "Retired Mod", members: "1.6K+", invite: "https://discord.gg/UTZyrFgDAJ", guildId: "1340404185857916968", iconHash: "0f38730b85e63b623362ec38b6caaa76" },
   { name: "FireSMP", role: "Retired Manager", members: "1.5K+", invite: "https://discord.gg/2eCbZtJWxM", guildId: "", iconHash: null },
 ];
