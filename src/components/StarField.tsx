@@ -33,9 +33,10 @@ export const StarField = () => {
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Density tuned for perf; cap on small/low devices
-      const density = isCoarse ? 22000 : 16000;
-      const target = Math.min(75, Math.floor((width * height) / density));
+      // Density tuned for perf; cap aggressively on mobile/low-end
+      const density = isCoarse ? 38000 : 16000;
+      const maxStars = isCoarse ? 35 : 75;
+      const target = Math.min(maxStars, Math.floor((width * height) / density));
       stars = Array.from({ length: target }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
