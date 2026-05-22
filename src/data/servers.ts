@@ -12,7 +12,7 @@ const cdn = (id: string, hash: string) =>
 
 export const SERVERS: DiscordServer[] = [
   { name: "AxonMC (Prism SMP)", role: "Owner", members: "700+", invite: "https://discord.gg/7vZa9NbMv9", guildId: "1357507103744589946", iconHash: "2a57ddb7d9c4b67e6883f7fc89a5f2e4" },
-  { name: "SMP Finder", role: "Mod", members: "45K+", invite: "https://discord.gg/hK4mjQKQ2p", guildId: "1186462339743105045", iconHash: "58063b2c7140f83e0954229229536581" },
+  { name: "SMP Finder", role: "Sr.Mod", members: "50K+", invite: "https://discord.gg/hK4mjQKQ2p", guildId: "1186462339743105045", iconHash: "58063b2c7140f83e0954229229536581" },
   { name: "MineHeart", role: "Helper", members: "25K+", invite: "https://discord.gg/NgRUANh3PT", guildId: "802570566879412265", iconHash: "9f2156f1957471ee0437ceff53128eb2" },
   { name: "PotionMC", role: "Retired Mod", members: "6.5K+", invite: "https://discord.gg/4naPwSQ8ms", guildId: "952434192862564352", iconHash: "b0cd03eb0371234c4d0d84b7548b7ace" },
   { name: "StaticPVP", role: "Retired Mod", members: "6.2K+", invite: "https://discord.gg/bg9X2jQgKy", guildId: "1396136303615283250", iconHash: "e425cfe820415bdafc6dea521ace453c" },
