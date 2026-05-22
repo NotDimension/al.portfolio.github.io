@@ -60,7 +60,7 @@ const SectionHeader = ({
   title: string;
   sub?: string;
 }) => (
-  <div className="mb-8 flex items-end justify-between">
+  <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
     <div>
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
       <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">{title}</h2>
