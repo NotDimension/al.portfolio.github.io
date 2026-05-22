@@ -15,9 +15,9 @@ export const ServerCard = ({ server }: { server: DiscordServer }) => {
       href={server.invite}
       target="_blank"
       rel="noreferrer noopener"
-      className="group flex h-full items-center gap-4 rounded-2xl border border-border/70 bg-card/70 p-4  hover:border-primary/50"
+      className="group flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card/70 p-3.5 backdrop-blur-sm hover:border-primary/50 sm:gap-4 sm:p-4"
     >
-      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary">
+      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary sm:h-14 sm:w-14">
         {icon ? (
           <img src={icon} alt={server.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
         ) : (
@@ -28,7 +28,7 @@ export const ServerCard = ({ server }: { server: DiscordServer }) => {
       </div>
 
       <div className="min-w-0 flex-1">
-        <h3 className="truncate font-semibold text-foreground">{server.name}</h3>
+        <h3 className="truncate text-sm font-semibold text-foreground sm:text-base">{server.name}</h3>
         <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${roleStyle(server.role)}`}>
             {server.role}
@@ -39,7 +39,7 @@ export const ServerCard = ({ server }: { server: DiscordServer }) => {
         </div>
       </div>
 
-      <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary sm:h-5 sm:w-5" />
     </TiltCard>
   );
 };

@@ -23,25 +23,25 @@ export const ContactCard = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/15 via-card/60 to-accent/10 p-6 md:p-10">
+    <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/15 via-card/60 to-accent/10 p-5 sm:p-6 md:p-10">
       <div className="pointer-events-none absolute -top-20 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full bg-primary/30 blur-3xl" />
-      <div className="relative flex flex-col items-center gap-5 text-center md:flex-row md:items-center md:gap-6 md:text-left">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#5865F2] text-white shadow-[0_10px_30px_-8px_rgba(88,101,242,0.6)]">
+      <div className="relative flex flex-col items-center gap-4 text-center md:flex-row md:items-center md:gap-6 md:text-left">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-secondary text-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.45)] sm:h-16 sm:w-16">
           <DiscordIcon className="h-9 w-9" />
         </div>
 
         <div className="flex-1">
-          <h3 className="text-2xl font-bold text-foreground md:text-3xl">Find me on Discord</h3>
-          <p className="mt-1 text-sm text-muted-foreground md:text-base">
+          <h3 className="text-xl font-bold text-foreground sm:text-2xl md:text-3xl">Find me on Discord</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground md:text-base">
             DM me directly, I'm always open to chat about staffing, bots, or just to say hi.
           </p>
 
           <div className="mt-4 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-            <div className="flex flex-1 items-center justify-between gap-3 rounded-full border border-border bg-background/60 px-4 py-2.5">
-              <span className="font-mono text-sm text-foreground">@{username}</span>
+            <div className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-2xl border border-border bg-background/60 px-4 py-3 sm:rounded-full sm:py-2.5">
+              <span className="truncate font-mono text-sm text-foreground">@{username}</span>
               <button
                 onClick={copy}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-xs font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-xs font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground"
                 aria-label="Copy Discord username"
               >
                 {copied ? (
@@ -59,7 +59,7 @@ export const ContactCard = () => {
               href={`https://discord.com/users/1223739092366524497`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#5865F2] px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-[#4752c4]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90"
             >
               <DiscordIcon className="h-4 w-4" /> Open Discord
             </a>
