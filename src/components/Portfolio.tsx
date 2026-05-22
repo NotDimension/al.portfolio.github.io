@@ -78,8 +78,9 @@ export const Portfolio = () => {
       <StarField />
       <main className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         {/* HERO */}
-        <section className="relative flex min-h-screen flex-col items-center justify-center text-center">
-          <div className="ring-glow mb-8 rounded-full p-1 animate-intro-zoom animate-float">
+        <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden py-16 text-center sm:py-20">
+          <div className="absolute inset-x-0 top-1/2 -z-10 h-64 -translate-y-1/2 bg-primary/10 blur-3xl" />
+          <div className="ring-glow mb-6 rounded-full p-1 animate-intro-zoom animate-float sm:mb-8">
             <a
               href="https://solo.to/al_plays16"
               target="_blank"
@@ -89,12 +90,12 @@ export const Portfolio = () => {
               <img
                 src={AVATAR}
                 alt="AL"
-                className="h-36 w-36 rounded-full object-cover md:h-44 md:w-44"
+                className="h-28 w-28 rounded-full object-cover sm:h-36 sm:w-36 md:h-44 md:w-44"
               />
             </a>
           </div>
 
-          <h1 className="text-6xl font-bold tracking-tight sm:text-8xl md:text-9xl">
+          <h1 className="text-5xl font-bold tracking-tight sm:text-7xl md:text-9xl">
             <a
               href="#about"
               className="text-shimmer cursor-pointer"
@@ -113,14 +114,14 @@ export const Portfolio = () => {
           </h1>
 
           <div
-            className="mt-6 max-w-xl animate-intro-zoom"
+            className="mt-5 max-w-xl animate-intro-zoom px-1 sm:mt-6"
             style={{ animationDelay: "1100ms" }}
           >
-            <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
               16 y/o experienced Discord staff member from Cali. I run servers,
               set up bots, and help communities thrive.
             </p>
-            <div className="mt-5 flex items-center justify-center gap-4 text-sm text-muted-foreground">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground sm:gap-4">
               <span className="flex items-center gap-1.5">
                 <MapPin className="h-4 w-4 text-primary" /> Cali
               </span>
@@ -133,7 +134,7 @@ export const Portfolio = () => {
 
           {/* scroll hint */}
           <div
-            className="absolute bottom-10 flex flex-col items-center gap-1 text-xs uppercase tracking-[0.25em] text-muted-foreground animate-intro-zoom"
+            className="absolute bottom-6 flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground animate-intro-zoom sm:bottom-10 sm:text-xs"
             style={{ animationDelay: "1500ms" }}
           >
             <span>Scroll</span>
@@ -142,7 +143,7 @@ export const Portfolio = () => {
         </section>
 
         {/* CURRENT */}
-        <section id="about" className="py-24">
+        <section id="about" className="py-16 sm:py-24">
           <Reveal>
             <SectionHeader
               eyebrow="Currently"
@@ -160,7 +161,7 @@ export const Portfolio = () => {
         </section>
 
         {/* PAST */}
-        <section className="py-12">
+        <section className="py-10 sm:py-12">
           <Reveal>
             <SectionHeader
               eyebrow="Previously"
@@ -178,8 +179,8 @@ export const Portfolio = () => {
         </section>
 
         {/* STATS */}
-        <section className="py-20">
-          <div className="grid grid-cols-3 gap-3 md:gap-5">
+        <section className="py-16 sm:py-20">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-5">
             {[
               { v: "10+", l: "Communities", icon: Server },
               { v: "100K+", l: "Members reached", icon: Users },
@@ -197,12 +198,12 @@ export const Portfolio = () => {
         </section>
 
         {/* ABOUT */}
-        <section className="py-20">
+        <section className="py-16 sm:py-20">
           <Reveal>
             <SectionHeader eyebrow="About" title="A bit about me" />
           </Reveal>
           <Reveal delay={100}>
-            <div className="rounded-3xl border border-border/70 bg-card/50 p-6 backdrop-blur-sm md:p-10">
+            <div className="rounded-3xl border border-border/70 bg-card/50 p-5 backdrop-blur-sm sm:p-6 md:p-10">
               <p className="text-base leading-relaxed text-foreground/85 md:text-lg">
                 I've been working in Discord communities for years, moderating,
                 helping members, setting up bots, and now owning my own server.
@@ -219,7 +220,7 @@ export const Portfolio = () => {
         </section>
 
         {/* SKILLS */}
-        <section className="py-20">
+        <section className="py-16 sm:py-20">
           <Reveal>
             <SectionHeader eyebrow="What I do" title="Skills & services" />
           </Reveal>
@@ -239,7 +240,7 @@ export const Portfolio = () => {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="py-20">
+        <section id="contact" className="py-16 sm:py-20">
           <Reveal>
             <SectionHeader eyebrow="Contact" title="Let's connect" />
           </Reveal>
