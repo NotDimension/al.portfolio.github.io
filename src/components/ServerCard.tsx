@@ -1,6 +1,7 @@
 import { ArrowUpRight, Users } from "lucide-react";
 import { DiscordServer, serverIcon } from "@/data/servers";
 import { TiltCard } from "./TiltCard";
+import { useDiscordInvite } from "@/hooks/useDiscordInvite";
 
 const roleStyle = (role: string) => {
   if (role.toLowerCase().includes("owner")) return "bg-primary text-primary-foreground";
