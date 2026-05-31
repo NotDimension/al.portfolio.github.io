@@ -184,7 +184,7 @@ export const Portfolio = () => {
             {[
               { v: "10+", l: "Communities", icon: Server },
               { v: "100K+", l: "Members reached", icon: Users },
-              { v: "3+", l: "Years staffing", icon: Sparkles },
+              { v: "1+", l: "Years staffing", icon: Sparkles },
             ].map((s, i) => (
               <Reveal key={s.l} delay={i * 100}>
                 <TiltCard className="rounded-2xl border border-border/70 bg-card/60 p-5 text-center backdrop-blur-sm hover:border-primary/50 md:p-7">
