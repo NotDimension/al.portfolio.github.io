@@ -10,7 +10,11 @@ const roleStyle = (role: string) => {
 };
 
 export const ServerCard = ({ server }: { server: DiscordServer }) => {
-  const icon = serverIcon(server);
+  const live = useDiscordInvite(server.invite);
+  const isRetired = server.role.toLowerCase().includes("retired");
+  const icon = (!isRetired && live?.icon) || serverIcon(server);
+  const name = (!isRetired && live?.name) || server.name;
+  const members = !isRetired && live?.members && live.members !== "0" ? live.members : server.members;
   return (
     <TiltCard
       href={server.invite}
