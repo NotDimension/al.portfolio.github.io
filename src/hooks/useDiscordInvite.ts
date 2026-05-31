@@ -17,16 +17,39 @@ const extractCode = (invite: string) => {
   return m ? m[1] : invite;
 };
 
-const cache = new Map<string, InviteData>();
+const STORAGE_PREFIX = "discord-invite:v1:";
+const memCache = new Map<string, InviteData>();
+
+const readPersisted = (invite: string): InviteData | null => {
+  if (memCache.has(invite)) return memCache.get(invite)!;
+  try {
+    const raw = localStorage.getItem(STORAGE_PREFIX + invite);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as InviteData;
+    memCache.set(invite, parsed);
+    return parsed;
+  } catch {
+    return null;
+  }
+};
+
+const writePersisted = (invite: string, data: InviteData) => {
+  memCache.set(invite, data);
+  try {
+    localStorage.setItem(STORAGE_PREFIX + invite, JSON.stringify(data));
+  } catch {
+    // ignore quota / unavailable storage
+  }
+};
 
 export const useDiscordInvite = (invite: string) => {
-  const [data, setData] = useState<InviteData | null>(() => cache.get(invite) ?? null);
+  const [data, setData] = useState<InviteData | null>(() => readPersisted(invite));
 
   useEffect(() => {
-    if (cache.has(invite)) {
-      setData(cache.get(invite)!);
-      return;
-    }
+    // Show any persisted version immediately, then refresh in background.
+    const cached = readPersisted(invite);
+    if (cached) setData(cached);
+
     const code = extractCode(invite);
     let cancelled = false;
     fetch(`https://discord.com/api/v10/invites/${code}?with_counts=true&with_expiration=true`)
@@ -42,7 +65,7 @@ export const useDiscordInvite = (invite: string) => {
           members: formatCount(json.approximate_member_count ?? 0),
           icon,
         };
-        cache.set(invite, result);
+        writePersisted(invite, result);
         setData(result);
       })
       .catch(() => {});
