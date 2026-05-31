@@ -24,22 +24,22 @@ export const ServerCard = ({ server }: { server: DiscordServer }) => {
     >
       <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary sm:h-14 sm:w-14">
         {icon ? (
-          <img src={icon} alt={server.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+          <img src={icon} alt={name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/30 to-accent/20 text-lg font-semibold text-foreground">
-            {server.name.charAt(0)}
+            {name.charAt(0)}
           </div>
         )}
       </div>
 
       <div className="min-w-0 flex-1">
-        <h3 className="truncate text-sm font-semibold text-foreground sm:text-base">{server.name}</h3>
+        <h3 className="truncate text-sm font-semibold text-foreground sm:text-base">{name}</h3>
         <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${roleStyle(server.role)}`}>
             {server.role}
           </span>
           <span className="flex items-center gap-1">
-            <Users className="h-3 w-3" /> {server.members}
+            <Users className="h-3 w-3" /> {members}
           </span>
         </div>
       </div>
